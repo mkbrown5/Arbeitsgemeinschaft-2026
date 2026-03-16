@@ -1,0 +1,487 @@
+\documentclass[11pt]{amsart}
+\usepackage{amstext,amsfonts,amssymb,amscd,amsbsy,amsmath,verbatim, mathrsfs, fullpage}
+\usepackage[alphabetic,abbrev,lite]{amsrefs} % for bibliography 
+\usepackage{ifthen,tikz}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage[all]{xy}
+\usepackage{enumerate}
+\usepackage{mathtools,accents}
+\setcounter{MaxMatrixCols}{15}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\numberwithin{equation}{section}
+
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem*{gr}{Green's Linear Syzygy Theorem}
+\newtheorem{propo}[equation]{Proposition}
+\newtheorem{prop}[equation]{Proposition}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{conj}[equation]{Conjecture}
+\newtheorem{claim}[equation]{Claim}
+%\newtheorem{claim*}{Claim}
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{convention}[equation]{Convention}
+\newtheorem{question}[equation]{Question}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}[equation]{Definition}
+\newtheorem{example}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{construction}[equation]{Construction}
+\newtheorem{algorithm}[equation]{Algorithm}
+\newtheorem{warning}[equation]{Warning}
+\newtheorem{conventions}[equation]{Conventions}
+
+\theoremstyle{remark}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{remarks}[equation]{Remarks}
+\newtheorem{rem}[equation]{Remark}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{case*}{Case}
+
+% Commands
+
+\newcommand{\Kos}{\mathcal{K}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\Cech}{\check{\mathrm{C}}}
+\newcommand{\Tate}{\on{Tate}}
+\newcommand{\Tail}{{\mathbf{Tail}}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\tot}{\operatorname{tot}}
+
+\newcommand{\isom}{\cong}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\PPv}{\mathbb P_{\on{var}}}
+\newcommand{\bD}{\mathbf D}
+\newcommand{\df}{\operatorname{diff}}
+\renewcommand{\P}{\PP}
+\newcommand{\bA}{\mathbb A}
+\newcommand{\A}{\bA}
+\newcommand{\HH}{\mathrm H}
+\newcommand{\GG}{\mathbb G}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\bH}{\mathbf H}
+\newcommand{\bF}{\mathbf F}
+\newcommand{\DD}{\mathbf D}
+\newcommand{\lideal}{\langle}
+\newcommand{\rideal}{\rangle}
+\newcommand{\initial}{\operatorname{in}}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\Hilb}{\operatorname{Hilb}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\NE}{\overline{\operatorname{NE}}}
+\newcommand{\Eff}{\operatorname{Eff}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Frac}{\operatorname{Frac}}
+\newcommand{\ch}{\operatorname{char}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Div}{\operatorname{Div}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\QQbar}{{\overline{\mathbb Q}}}
+\newcommand{\Br}{\operatorname{Br}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\Cox}{\operatorname{Cox}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\Hom}{\operatorname{Hom}} %done
+\newcommand{\sheafHom}{\mathcal{H}om}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\HF}{\operatorname{HF}}
+\newcommand{\HP}{\operatorname{HP}}
+\newcommand{\Osh}{{\mathcal O}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\kk}{{\bf k}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\length}{\operatorname{length}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\depth}{\operatorname{depth}}
+%\newcommand{\FF}{\mathbb{F}}
+\newcommand{\F}{\FF}
+\newcommand{\Sym}{\operatorname{Sym}} %done
+\newcommand{\GL}{{GL}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\Syz}{\operatorname{Syz}}
+\newcommand{\Prob}{\operatorname{Prob}}
+\newcommand{\defi}[1]{\textsf{#1}} % for defined terms
+\newcommand{\Htot}{H_{\tot}}
+\newcommand{\Ltot}{L_{\tot}}
+\newcommand{\beq}{\begin{displaymath}}
+\newcommand{\eeq}{\end{displaymath}}
+\newcommand{\bs}{\backslash}
+\newcommand{\ff}{\mathbf{f}}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\Lotimes}{\overset{L}{\otimes}}
+\newcommand{\uHom}{\underline{\Hom}}
+\def\nc{\newcommand}
+\nc{\tors}{\on{tors}}
+
+
+
+\newcommand{\Bmod}{\ensuremath{B_\text{mod}}}
+\newcommand{\Bint}{\ensuremath{B_\text{int}}}
+\newcommand\commentr[1]{{\color{red} \sf [#1]}}
+\newcommand\commentb[1]{{\color{blue} \sf [#1]}}
+\newcommand\commentm[1]{{\color{magenta} \sf [#1]}}
+\newcommand{\daniel}[1]{{\color{blue} \sf $\clubsuit\clubsuit\clubsuit$ Daniel: [#1]}}
+\newcommand{\michael}[1]{{\color{red} \sf $\clubsuit\clubsuit\clubsuit$ Michael: [#1]}}
+\newcommand{\maya}[1]{{\color{green} \sf $\clubsuit\clubsuit\clubsuit$ Maya: [#1]}}
+
+\def\edim{\operatorname{edim}}
+\def\reg{\operatorname{reg}}
+
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\chr}{\ensuremath{\operatorname{char}}}
+
+%Added by MB:
+\def\nc{\newcommand}
+\def\on{\operatorname}
+\nc{\Q}{\mathbb{Q}}
+\nc{\RR}{\mathbf{R}}
+\nc{\LL}{\mathbf{L}}
+\nc{\xra}{\xrightarrow}
+\nc{\xla}{\xleftarrow}
+\def\a{\mathbf{a}}
+\def\om{\omega}
+\def\Om{\Omega}
+\def\DM{\operatorname{DM}}
+\def\Coh{\operatorname{Coh}}
+\def\Mod{\operatorname{Mod}}
+\def\free{\operatorname{free}}
+\def\QCoh{\operatorname{QCoh}}
+\def\Cpx{\operatorname{Cpx}}
+\def\th{\on{th}}
+\def\F{\mathcal{F}}
+\def\coker{\on{coker}}
+\def\p{\partial}
+\def\wt{\widetilde}
+\def\i{\iota}
+\nc{\into}{\hookrightarrow}
+\nc{\onto}{\twoheadrightarrow}
+\nc{\OO}{\mathcal{O}}
+\nc{\Z}{\mathbb{Z}}
+\nc{\cA}{\mathcal{A}}
+\nc{\w}{\widehat}
+\nc{\End}{\on{End}}
+\nc{\res}{\frac{1}{x_0x_1}}
+\nc{\tF}{\widetilde{F}}
+\nc{\tG}{\widetilde{G}}
+\nc{\tf}{\widetilde{f}}
+\nc{\Com}{\on{Com}}
+\nc{\exact}{\on{exact}}
+
+\nc{\G}{\mathbb{G}}
+\nc{\cG}{\mathcal{G}}
+\nc{\cE}{\mathcal E}
+\nc{\cF}{\mathcal F}
+\nc{\cR}{\mathcal R}
+\nc{\cD}{\mathcal D}
+\nc{\cB}{\mathcal B}
+\nc{\cT}{\mathcal T}
+\nc{\cL}{\mathcal L}
+\def\M{\mathcal{M}}
+\nc{\bM}{\mathbf M}
+\nc{\bN}{\mathbf N}
+\nc{\U}{\mathbf U}
+\nc{\BM}{\mathbf B \mathbf M}
+\nc{\Dsg}{\on{D}_{\on{sg}}}
+\nc{\fC}{\mathcal{C}}
+\nc{\fG}{\mathcal{G}}
+\nc{\N}{\mathbb{N}}
+
+
+
+%When merging files, add these
+\nc{\del}{\partial}
+\nc{\cone}{\on{cone}}
+\nc{\D}{\on{D}_{\on{diff}}}
+\nc{\DMb}{\on{D}^b_{\DM}}
+\nc{\Db}{\on{D}^{\on{b}}}
+\nc{\Kb}{\on{K}^{\on{b}}}
+\nc{\fm}{\mathfrak{m}}
+\nc{\Flag}{\on{Flag}}
+\nc{\DMmin}{\DM_{\on{min}}}
+\nc{\Ddiff}{\on{D}_{\on{diff}}}
+\nc{\Dbdiff}{\on{D}^\on{b}_{\on{diff}}}
+\nc{\wO}{\widehat{\OO}}
+\nc{\wT}{\widehat{T}}
+\nc{\from}{\leftarrow}
+\nc{\wLL}{\widetilde{\LL}}
+\nc{\augCech}{\widetilde{\cC}}
+\nc{\Fold}{\on{Fold}}
+\nc{\Ext}{\on{Ext}}
+\nc{\RHom}{\on{RHom}}
+\nc{\FF}{\mathbf{F}}
+\nc{\Comper}{\Com_{\on{per}}}
+\nc{\Unfold}{\on{Unfold}}
+\nc{\intHom}{\underline{\Hom}}
+\nc{\Ex}{\on{Ex}}
+\nc{\tg}{\widetilde{g}}
+\def\tP{\widetilde{P}}
+\def\b{\beta}
+\nc{\B}{\mathcal{B}}
+\nc{\K}{\mathcal{K}}
+\nc{\kos}{\on{Kos}}
+\nc{\Perf}{\on{Perf}}
+\nc{\tR}{\widetilde{\cR}}
+\nc{\X}{\mathcal{X}}
+\nc{\Cl}{\on{Cl}}
+\nc{\fU}{\mathcal{U}}
+\nc{\bU}{\mathbf U}
+\def\co{\colon}
+\def\ce{\coloneqq}
+\nc{\st}{\on{st}}
+\def\E{\mathcal{E}}
+\nc{\coh}{\on{coh}}
+\def\ex{\on{ex}}
+\def\D{D}
+\def\lin{\on{lin}}
+\def\g{\gamma}
+\nc{\tU}{\U}
+\nc{\bC}{\mathbf{C}}
+\nc{\aux}{\on{aux}}
+\def\d{\mathbf{d}}
+\def\phi{\varphi}
+\def\cP{\mathcal{P}}
+\def\I{\mathcal{I}}
+\def\geo{\on{geo}}
+\def\T{\mathbf{T}}
+\nc\Dsing{\on{D}^{\on{sing}}}
+\def\Y{\mathcal{Y}}
+\def\bL{\mathbf{L}}
+\def\k{\mathbf{k}}
+\def\e{\epsilon}
+\def\epsilon{\varepsilon}
+\def\w{\mathbf w}
+\def\colim{\on{colim}}
+\def\fix#1{{{\bf ***}#1{\bf ***}}}
+%\title[Toric methods in homological algebra]{Arbeitsgemeinschaft:  \\ Toric methods in homological algebra \\ October 11 - 16, 2026}
+\title[New homological methods in toric geometry]{Arbeitsgemeinschaft:  \\ New homological methods in toric geometry\\ October 11 - 16, 2026}
+\author{Michael K. Brown}
+\author{David Eisenbud}
+\author{Daniel Erman}
+%This command gets rid of the MR number in the bibliography
+\def\MR#1{}
+
+
+
+%\newcommand{\Addresses}{{
+%	\vskip\baselineskip
+%  	\footnotesize
+%  	\noindent \textsc{Department of Mathematics and Statistics, Auburn University, Auburn, AL} \par\nopagebreak
+%	\noindent \textit{E-mail address:} \texttt{mkb0096@auburn.edu}
+%	\vskip\baselineskip
+%	\noindent \textsc{Department of Mathematics, \UHM, Honolulu, HI} \par\nopagebreak
+%	\noindent \textit{E-mail address:} \texttt{erman@hawaii.edu}
+%  }}
+
+%\newcommand{\Addresses}{{
+%	\vskip\baselineskip
+%  	\footnotesize
+%  	\noindent \textsc{Department of Mathematics and Statistics, Auburn University, Auburn, AL} \par\nopagebreak
+%	\noindent \textit{E-mail address:} \texttt{mkb0096@auburn.edu}
+%	\vskip\baselineskip
+%	\noindent \textsc{Department of Mathematics, \UHM, Honolulu, HI} \par\nopagebreak
+%	\noindent \textit{E-mail address:} \texttt{erman@hawaii.edu}
+%  }}
+
+
+\begin{document}
+
+\maketitle
+
+The goal of this Arbeitsgemeinschaft is to highlight several recent generalizations to toric varieties of landmark theorems about the derived category of projective space. 
+Specifically, a theorem of Beilinson~\cite{beilinson} gives a resolution of the diagonal sheaf on $\PP^n \times \PP^n$, leading to a full strong exceptional collection for the derived category of $\PP^n$ given by the line bundles $\OO(-n), \cdots \OO(-1), \OO$, the \emph{Beilinson collection}. A closely related theorem due to Bernstein-Gel'fand-Gel'fand~\cite{BGG} states that the derived category of $\PP^n$ is equivalent to the stable category of modules over an exterior algebra. These theorems launched the study of derived categories in algebraic geometry.
+
+A breakthrough 2024 theorem of Hanlon-Hicks-Lazarev~\cite{HHL} generalized Beilinson's resolution of the diagonal to toric varieties, and subsequent work of Ballard et al.~\cite{king} applied Hanlon-Hicks-Lazarev's theorem to give a toric version of Beilinson's collection. Around the same time, Brown-Erman~\cite{BETate} proved a toric analogue of Bernstein-Gel'fand-Gel'fand's theorem. Proving---and even stating---these results requires a substantial departure from the case of $\PP^n$, involving entirely new homological and categorical constructions. The aim of this week is to understand these three theorems. 
+
+We will assume some familiarity with algebraic geometry (varieties and sheaf cohomology) and with homological algebra (free resolutions and derived functors like $\Ext$ and $\Tor$).  We will also assume a small amount of knowledge toric varieties, e.g.~\cite[\S3]{CLS}.  
+%~\cite{hartshorne} and \cite[Chapters 1 - 5]{weibel}. {\color{red} Maybe mention triangulated categories here?}
+Participants may find it useful to read about derived categories and the aforementioned theorems of Beilinson and Bernstein-Gel'fand-Gel'fand in, for example,~\cite[\S 3]{caldararu} and~\cite[\S 2]{EFS}.  Additional knowledge of toric varieties, such as \cite[\S5, \S6, \S9, \S14]{CLS} would be helpful, but not assumed.
+
+
+The Hirzebruch surface of type $3$, which we denote as $\mathcal H_3$, will serve as a running example through the week, and participants should be familiar with this example.  See~\cite[Example 3.1.16]{CLS}.  In addition, the organizers will prepare a demo package in {\tt Macaulay2} so that the speakers (and participants) can more easily compute explicit examples to illustrate the relevant results and constructions.  
+
+
+\section{Monday: Background on the derived category of $\PP^n$ and toric varieties}
+
+\subsection{Derived Category of $\PP^n$, I}
+Briefly define the bounded derived category of a variety, and briefly explain that it is an example of a triangulated category. Define the notion of a Fourier-Mukai transform between derived categories of varieties. Explain why the Fourier-Mukai transform with kernel given by the diagonal sheaf is isomorphic to the identity functor. Discuss Beilinson's resolution of the diagonal sheaf on $\PP^n \times \PP^n$.
+
+ 
+
+\subsection{Derived Category of $\PP^n$, II}
+Define semiorthogonal decompositions and (full, strong) exceptional collections for triangulated categories. As a key example, use Beilinson's resolution of the diagonal to prove that the Beilinson collection gives a full strong exceptional collection for~$D^b(\PP^n)$~\cite{caldararu}*{\S 3}. Discuss how this implies that the Grothendieck group $K_0(\PP^n)$ is isomorphic to~$\Z^{n+1}$. %State Bondal's Theorem relating the derived category of a smooth projective variety with a full strong exceptional collection to the derived category of a noncommutative algebra~\cite{huybrechts}*{Theorem 8.34}. 
+This theorem launched a search for exceptional collections and semiorthgonal decompositions for other varieties.  As time permits, provide a brief overview of some results in this vein, such as Kapranov's exceptional collections for smooth quadrics and Grassmanians~\cite{kapranov}, 
+Orlov's blowup formula~\cite{huybrechts}*{Proposition 11.18} and projective bundle formula~\cite{huybrechts}*{Corollary 8.36}. See~\cite{kuznetsov} for a survey on this topic.
+
+
+\subsection{Derived Category of $\PP^n$, III}
+\label{sec:pn3}
+Describe the Bernstein-Gel'fand-Gel'fand (BGG) correspondence, which gives an equivalence of bounded derived categories between a graded polynomial ring~$S$ and its Koszul dual exterior algebra $E$. Describe the functors between these two categories, following \cite{EFS}*{\S 2}, and include some explicit examples. Illustrate that these functors are inverses equivalences by evaluating their compositions at the residue field. (A detailed proof that these functors are inverse equivalences is too much for one lecture.) Letting $D^b_\m(S)$ denote the subcategory of $D^b(S)$ given by complexes with homology supported in the homogeneous maximal ideal $\m$, explain that the BGG correspondence identifies $D^b_\m(S)$  with perfect complexes in $D^b(E)$. Briefly discuss Verdier quotients of triangulated categories, and note that $D^b(S) / D^b_\m(S)$ is equivalent to $D^b(\PP^n)$. Conclude that the BGG correspondence identifies $D^b(\PP^n)$ with the singularity category of~$E$, i.e. $D^b(E)$ modulo perfect complexes. 
+
+
+
+\subsection{Toric varieties and Cox rings, I}
+Review how to associate a normal toric variety to a fan~\cite{CLS}*{\S 3.1}. Given a fan $\Sigma$ and the associated toric variety $X_\Sigma$, explain how the rays in $\Sigma$ determine divisors on $X_\Sigma$ via the Orbit-Cone Correspondence~\cite{CLS}*{\S 4.1}. Define the Cox ring (also called the homogeneous coordinate ring) $S$ of $X_\Sigma$, its grading by the divisor class group $\Cl(X_\Sigma)$, and its irrelevant ideal $B$. Explain how the variety $X_\Sigma$ arises as the quotient of $\Spec(S) \setminus V(B)$ by a torus action. Potential references for Cox rings are \cite{CLS}*{\S 5.1} or Cox's original paper~\cite{cox}. Include running examples throughout, especially projective space, products of projective spaces, weighted projective spaces, and Hirzebruch surfaces $\mathcal{H}_i$ for $i \ge 1$. 
+%{\color{red} If we assume some prerequisites, we can shorten thus, move some of tuesday's material up here, lightening up tuesday somewhat}
+
+
+%Topics for these two lectures: toric varieties from fans. Key examples. Cox rings and irrelevant ideals. Secondary fan and GIT. Touch on stacks?
+
+%what is a derived category?  Why do people care? 
+
+
+
+
+
+
+
+
+
+
+%\subsection{Derived Categories III?}
+%Entire lecture on Fourier-Mukai transforms?
+
+\subsection*{Evening discussion: Computation}  Working with normal toric varieties in {\tt Macualay2}.
+
+
+\section{Tuesday: more background on toric varieties and the construction of the Hanlon-Hicks-Lazarev resolution}
+
+\subsection{Toric varieties and Cox rings, II}
+Describe the Toric Ideal-Variety Correspondence~\cite{CLS}*{Proposition 5.2.7}. Demonstrate by example that the Cox rings of non-isomorphic toric varieties can be isomorphic as graded rings. Describe how graded modules over the Cox ring induce sheaves on toric varieties~\cite{CLS}*{\S 5.3}. Explain that when $X_\Sigma$ is a smooth toric variety associated to a fan $\Sigma$ with Cox ring $S$, there is an equivalence $D^b(X_\Sigma) \simeq D^b(S) / D^b_B(S)$, where $D^b_B(S)$ denotes the subcategory of complexes with support in $V(B)$: this follows essentially from \cite{CLS}*{Propositions 5.3.9 and 5.3.10}. Explain how this can fail when $X_\Sigma$ is not smooth (see e.g. \cite{CLS}*{Exercise 5.3.5}).  %for instance, letting $S = k[x_0, x_1, x_2]$ denote the Cox ring of the weighted projective space $\PP(1,1,2)$ and $M$ the $S$-module $S / (x_0, x_1)$, the module $M(1)$ is not supported only at the origin, but its associated sheaf on $\PP(1,1,2)$ is zero .  {\color{red} I think we should leave out stacks from this lecture, and maybe mention the connection to toric stacks informally during discussion. I don't know of a good reference for the fact that the derived category of the stack quotient of $\Spec(S) \setminus V(B)$ by the torus action is equivalent to $D^b(S) / D^b_B(S)$.} 
+Finally, state the Demazure vanishing theorem~\cite{CLS}*{Theorem 9.2.3}. 
+
+
+
+%\subsection{The Toric Syzygy Conjecture and Orlov's Conjecture} Both “generalize” Hilbert Syzygy in some sense. Existence of appropriate resolution of diagonal implies TSC and OC via Fourier-Mukai transform.  Proof of TSC and OC via the Brown-Erman resolution of diagonal.  (Note that this is ahistorical because HHL preceded Brown-Erman.)
+%\subsection{Toric subvarieties and the Brown-Erman resolution}
+%Algebraic proof of TSC and toric OC. 
+
+%\subsection{King's conjecture}
+%What is missing from TSC and toric OC?  Brown-Erman resolution does not give a recipe for the generating set of line bundles AND, even in simple exmaples, that set is NOT an exceptional collection.   
+%
+%History of King's Conjecture.  What was the motivation and what was the history?
+%	What was known.  Why false?
+
+\subsection{The Bondal-Thomsen collection.}
+Define the Bondal-Thomsen collection, which plays the role of the Beilinson collection in the toric setting. A reference is~\cite{HHL}*{Section 2.3} (where it is referred to as simply the Thomsen collection). This reference handles the generality of toric stacks~\cite{GS}, but it is preferable here to stick to the case of toric varieties (i.e. the case where the map $\beta$ in \cite{HHL}*{\S 2.3} is the identity map). Compute several examples, e.g. $\PP^n$ and Hirzebruch surfaces. If time allows, weighted projective spaces and the varieties in the Atiyah flop are also valuable examples. Discuss \cite{HHL}*{Corollary 5.5}, which identifies the Bondal-Thomsen collection with summands of a Frobenius pushforward. 
+Show that the  Bondal-Thomsen collection for $\mathcal H_3$ has $6$ elements but that, unlike what happens for $\PP^n$, these do not form an exceptional collection.
+%a Hirzebruch surface has an exceptional collection of size 4, but, for instance, the Bondal-Thomsen collection for a Hirzebruch surface of type 3 has 6 elements.
+%Observe that for a  unlike the Beilinson collection, the Bondal-Thomsen collection is not always an exceptional collection in the derived category (although it is always a generating set, as we will see tomorrow).
+%Using the example of a Hirzebruch surface, show that, unlike the Beilinson collection, the Bondal-Thomsen collection is not always an exceptional collection in the derived category (although it is always a generating set, as we will see tomorrow). More precisely: it is known that a Hirzebruch surface has an exceptional collection of size 4, but, for instance, the Bondal-Thomsen collection for a Hirzebruch surface of type 3 has 6 elements. On the other hand, discuss how the line bundles in the Bondal-Thomsen collection satisfy an important cohomological vanishing property, generalizing an important aspect of the Beilinson collection: see~\cite{king}*{Lemma 2.20}. {\color{red} Move this last sentence to 4.2?}
+
+
+%Define it and prove Thomsen's theorem~\cite{thomsen}. Ways in which the Bondal-Thomsen collection is a good generalization of Beilinson's collection (appearance in Demazure Vanishing for $\QQ$-divisors. Proof that these are the summands of Frobenius pushforwards, more??) and ways in which it is not a good generalization (not an exceptional collection, not a basis for $K_0(X)$, not anti-nef).
+
+%Examples:  Projective space, weighted projective space, Hirzebruch surface of type $3$, Atiyah flop.
+%The Bondal stratification and
+%References:  HHL and King's paper.  (Fill in details.)
+
+\subsection{Constructing the Hanlon-Hicks-Lazarev resolution} Explain the construction of the Hanlon-Hicks-Lazarev resolution, following the exposition in \cite{BH25}. Once again, the construction is presented at the level of toric stacks, but it is preferable to focus on varieties. Work through several examples: a point in $\PP^2$; the diagonal in $\PP^2$ (compare with Beilinson's resolution); the diagonal of a Hirzebruch surface; the twisted cubic in $\PP^3$; more as time permits. Remark that resolutions of the diagonal with properties of the HHL resolution (e.g. with length given by the dimension of the variety and terms given by sums of line bundles) had been constructed previously in several special cases, see e.g. \cite{BETate, BPS01, BS24, CK}. 
+
+There is Macaulay2 code for computing Hanlon-Hicks-Lazarev resolutions, which will be provided in a demo package.  This lecturer might consider including an explicit Macaulay2 demonstration as part of this lecture.
+
+\subsection{Proof of the Hanlon-Hicks-Lazarev Theorem} Prove the Hanlon-Hicks-Lazarev theorem~\cite{HHL}*{Theorem A}, following the simplified approach introduced in the recent preprints \cite{BCHSY} and \cite{BH25}.  Mention the connection to the integral closure of the coordinate ring and thus to~\cite{BEshort}, as proven in \cite{BCHSY}*{\S4}.
+
+
+\subsection*{Evening discussion: Symplectic Motivation}
+How did the symplectic viewpoint motivate Hanlon, Hicks, and Lazarev?
+ %proof that that the Hanlon-Hicks-Lazarev complex is a resolution of the normalization of the coordinate ring of $Y$ in $X$.  (And thus, its minimization is equivalent to the resolution from~\cite{BEshort}.)
+%\subsection{Applications on the HHL Theorem}  
+\section{Wednesday: Applications and the Cox Category}
+\subsection{Applications of the Hanlon-Hicks-Lazarev Theorem}
+Discuss four main applications of the Hanlon-Hicks-Lazarev Theorem:
+\begin{enumerate}
+\item A smooth toric stack $X$ admits a resolution of the diagonal of length $\dim(X)$ whose terms are sums of line bundles. This gives the desired toric generalization of Beilinson's resolution of the diagonal over $\PP^n$. 
+\item Berksech-Erman-Smith's conjecture~\cite{BES}*{Question 6.5} on short virtual resolutions: see~\cite{HHL}*{Corollary C}.
+\item The Bondal-Thomsen collection generates the derived category~\cite{HHL}*{Corollary D}.  A different proof of this fact appears in~\cite{FH}*{Corollary 3.5}.
+\item The toric case of Orlov's Conjecture~\cite{orlov}*{Conjecture 10}: see~\cite{HHL}*{Corollary E}. Again, a different proof can be found in~\cite{FH}*{Theorem 1.2}.
+\end{enumerate}
+
+\noindent Briefly discuss the history of partial results concerning (1) - (4), as outlined in \cite{HHL}*{Section 1}. 
+
+%\subsection{Cohomology of line bundles on toric varieties}
+
+\subsection{The Cox category, I: Background}
+Discuss the secondary fan of a toric variety $X$, following the terse exposition in \cite{king}*{\S 2.1}. The key point to describe here is that the (finitely many) maximal cones of the secondary fan parameterize the simplicial, projective toric varieties with the same Cox ring as $X$--i.e. the projective simplicial fans with the same rays as $X$--as well as the projective simplicial fans whose rays are a subset of the rays of $X$.
+%Basics on secondary fan: main point to get across is that the maximal chambers parametrize the simplicial, projective toric varieties $X_1, \dots, X_r$ whose rays are a subset of a given set of rays; {\color{red}see \cite[TBD]{CLS}}. 
+Observe that the Hanlon-Hicks-Lazarev resolution of the diagonal is ``uniform'' for any $X_i$ with the same rays (or even a subset of those rays). This allows us to explicitly define the Fourier--Mukai transforms between the toric varieties from the secondary fan (as in \cite[p. 2]{king}).
+%Examples of the FM transforms e.g. the Atiayh flop.
+
+
+\subsection{The Cox category, II: Definition}
+Briefly discuss King's conjecture and its history.
+%its partial results, and its counterexamples. Define Cox categories + examples
+Define the Cox category and establish its basic properties, as in~\cite[\S3]{king}.  Give examples.  Contrast with constructions that \emph{don't} work: e.g. \cite[Remark 4.8]{king}.  State the main theorem, i.e. the revised King Conjecture~\cite[Theorem A]{king}.    Add examples: $\PP^n$, weighted projective spaces, a Hirzebruch surface, etc.
+    
+%\subsection{The $\Theta$-Transform Lemma}
+%Statement with examples. Sketch of proof?  Needs to include a discussion of Demazure Vanishing. 
+
+\subsection*{Evening discussion: TBD}  To be determined by participants.
+
+\section{Thursday: Proof of the revised King Conjecture and applications}
+\subsection{Outline of the proof of the revised King's Conjecture}
+State the $\Theta$-Transform Lemma and demonstrate via several examples, like~\cite[\S4.2]{king}.  Outline how to obtain the Revised King Conjecture from the $\Theta$-Transform Lemma, as in \cite[\S1.2]{king}.
+
+\subsection{Proof of Revised King's Conjecture, II: Exceptionality}
+Prove the $\Theta$-Transform Lemma, following \cite[\S4.3]{king}.  Illustrate the key steps through the lens of the Bondal-Thomsen elements on the Hirzebruch surface $\mathcal H_3$.
+
+\subsection{Proof of Revised King's Conjecture, III: Exceptionality and Conclusion}
+Finish the proof of the Revised King's Conjecture, following \cite[\S4.3 and \S5]{king}.
+
+
+%\subsection{Proof of the revised King's Conjecture} Putting the pieces together, generation of the category.
+\subsection{Applications of Cox categories}
+Discuss some applications of \cite{king}*{Theorem A}, potentially including \cite[Proposition 1.3, Theorems 1.4, 1.5]{king}, at the discretion of the lecturer.
+%{\color{red}  Still need to determine what goes here.} NC resolutions?  Merkurjev-Panin??
+
+%\subsection{Applications of HHL Theorem}
+
+\subsection*{Evening discussion: TBD}  To be determined by participants.
+
+\section{Friday: The BGG correspondence for toric varieties}
+
+\subsection{Tate resolutions over $\PP^n$}
+Recall from Lecture~\ref{sec:pn3} that $D^b(\PP^n)$ is equivalent to the singularity category of an exterior algebra $E$. Explain how the singularity category of $E$, in turn, is equivalent to the homotopy category $K(E)$ of exact complexes of finitely generated graded free $E$-modules~\cite{buchweitz}*{Theorem 4.4.1}. The BGG correspondence for $\PP^n$ may therefore be realized as an equivalence $T \co \Db(\PP^n) \xra{\simeq} K(E)$. The equivalence $T$ is the Tate resolution functor described in~\cite{EFS}*{\S 4}. Explain the formula for this functor, evaluated just on coherent sheaves (not complexes of such), and compute some explicit examples. Displaying Macaulay2 computations using the Macaulay2 package BGG could be useful. Discuss the calculation of the terms of the Tate resolution in terms of sheaf cohomology~\cite{EFS}*{Theorem 4.4.1}. Explain also the application to effectively computing Beilinson monads in \cite{EFS}*{Theorem 6.1}. 
+
+\subsection{Tate resolutions on toric varieties}
+Briefly explain the multigraded BGG correspondence, as described in \cite{BETate}*{\S 2}. Then state and prove \cite{BETate}*{Theorem 3.3}, which gives the toric analogue of Tate resolutions on toric varieties. Compute some examples over weighted projective stacks as in \cite{BETate}*{\S 3.4}. Display some example computations using the MultigradedBGG package in Macaulay2~\cite{BBGSTZ}. 
+
+\medskip
+
+
+%{\color{red} Build a demo file for M2 for the speakers for whom it will be useful?}
+
+%{\color{red} Make a list of references for further reading? This doesn't need to be part of this program.}
+\bibliographystyle{amsalpha}
+\bibliography{Bibliography}
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
