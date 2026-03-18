@@ -50,6 +50,54 @@ gale = m -> gens ker (if coker m == 0 then identity else transpose) m
 -- TODO: can we use this? galeDualMatrix := matrix (fromWDivToCl X)^torsionlessCoord;
 
 --------------------------------------------------------------------------------
+-- REMOVE ME: starting M2 v1.26.05, toricBlowup accepts an option
+--------------------------------------------------------------------------------
+
+debug NormalToricVarieties
+toricBlowup' = method(Options => { WeilToClass => null })
+toricBlowup'(List, NormalToricVariety)       := NormalToricVariety => opts -> (s, X) -> (
+    toricBlowup'(s, X, makePrimitive sum ((rays X)_s), opts))
+toricBlowup'(List, NormalToricVariety, List) := NormalToricVariety => opts -> (s, X, v) -> (
+    coneList := max X;
+    starIndex := positions (coneList, t -> all (s, i -> member (i,t)));
+    star := coneList_starIndex;
+    rayMatrix := transpose matrix rays X;
+    d := dim X;
+    clStar := {};
+    if member(sort s, coneList)
+    then clStar = subsets(sort s, d-1)
+    else for t in star do (
+    	c := 1 + d - rank rayMatrix_t;
+    	clStar = clStar | select (orbits(X,c), r -> all (r, j -> member(j,t)))
+	);
+    clStar = unique clStar;
+    n := #rays X;
+    coneList = coneList_(select (#coneList, i -> not member (i, starIndex)));
+    if #s === 1 then (
+    	coneList' := for t in clStar list (
+      	    if member (s#0,t) then continue
+      	    else sort (t | s)
+	    );
+	Z := normalToricVariety(rays X, coneList | coneList',
+	    CoefficientRing => X.cache.CoefficientRing,
+	    Variable        => X.cache.Variable,
+	    WeilToClass     => opts.WeilToClass);
+        Z.cache.toricBlowup' = X;
+        return Z
+	);
+    coneList' = for t in clStar list (
+	if all (s, i -> member (i,t)) then continue
+	else t | {n}
+	);
+    Z = normalToricVariety(rays X | {v}, coneList | coneList',
+	CoefficientRing => X.cache.CoefficientRing,
+	Variable        => X.cache.Variable,
+	WeilToClass     => opts.WeilToClass);
+    Z.cache.toricBlowup' = X;
+    Z
+    );
+
+--------------------------------------------------------------------------------
 -- Primitive collections and wall relations
 --------------------------------------------------------------------------------
 -- These routines extract the combinatorial data that controls wall crossings
@@ -381,8 +429,8 @@ Bl2PP = method(Options => { CoefficientRing => QQ , Variable => getSymbol "x" })
 Bl2PP ZZ := NormalToricVariety => opts -> n -> (
     -- Bl_2(PP^n) with degrees based on Example 4.7 of arXiv:2501.00130
     PPn := toricProjectiveSpace(n, opts);
-    Bl1 := toricBlowup(toList(0..n-1), PPn, WeilToClass => matrix { toList(n+1:1) | {0},   toList(n:0) | {1,1}});
-    X   := toricBlowup(toList(1..n),   Bl1, WeilToClass => matrix { toList(n+1:1) | {0,0}, toList(n:0) | {1,1,0}, {1} | toList(n+1:0) | {1}});
+    Bl1 := toricBlowup'(toList(0..n-1), PPn, WeilToClass => matrix { toList(n+1:1) | {0},   toList(n:0) | {1,1}});
+    X   := toricBlowup'(toList(1..n),   Bl1, WeilToClass => matrix { toList(n+1:1) | {0,0}, toList(n:0) | {1,1,0}, {1} | toList(n+1:0) | {1}});
     X)
 
 --------------------------------------------------------------------------------
